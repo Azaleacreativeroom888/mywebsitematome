@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>リンク</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Noto+Serif+JP:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9922a;
+    --gold-light: #e8c060;
+    --ink-bg: #1a0e08;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Serif JP', 'メイリオ', serif;
+    background-color: var(--ink-bg);
+    background-image:
+      radial-gradient(ellipse at 20% 20%, rgba(42,24,14,0.8) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 80%, rgba(45,26,74,0.4) 0%, transparent 60%),
+      repeating-linear-gradient(
+        45deg, transparent, transparent 40px,
+        rgba(201,146,42,0.03) 40px, rgba(201,146,42,0.03) 41px
+      );
+    background-attachment: fixed;
+    color: #e8d5a3;
+    min-height: 100vh;
+  }
+  
+  /* ページヘッダー */
+  .page-header {
+    text-align: center;
+    padding: 52px 24px 36px;
+  }
+
+  .page-header::before {
+    content: '';
+    display: block;
+    width: 200px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto 28px;
+  }
+
+  .page-header h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 26px;
+    color: var(--gold-light);
+    letter-spacing: 4px;
+    text-shadow: 0 0 16px rgba(201,146,42,0.4);
+    margin-bottom: 8px;
+  }
+
+  .page-header .subtitle {
+    font-size: 12px;
+    color: #7a6040;
+    letter-spacing: 3px;
+  }
+
+  .page-header .lead {
+    font-size: 13px;
+    color: #a89060;
+    margin-top: 14px;
+    letter-spacing: 1px;
+  }
+
+  /* メインコンテンツ */
+  .main-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* セクション見出し */
+  .section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    color: #7a6040;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(201,146,42,0.3), transparent);
+  }
+
+  /* リンクグリッド */
+  .link-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+
+  /* リンクカード */
+  .link-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none;
+    background: linear-gradient(135deg, rgba(26,48,32,0.55), rgba(15,20,35,0.45));
+    border: 1px solid rgba(201,146,42,0.2);
+    border-radius: 4px;
+    padding: 16px 18px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .link-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--gold), transparent);
+    border-radius: 4px 0 0 4px;
+  }
+
+  .link-card:hover {
+    border-color: rgba(201,146,42,0.55);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.35), 0 0 12px rgba(201,146,42,0.1);
+  }
+
+  .link-icon {
+    font-size: 26px;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(201,146,42,0.08);
+    border: 1px solid rgba(201,146,42,0.2);
+    border-radius: 3px;
+  }
+
+  .link-text { flex: 1; min-width: 0; }
+
+  .link-name {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gold-light);
+    margin-bottom: 3px;
+  }
+
+  .link-desc {
+    display: block;
+    font-size: 11px;
+    color: #7a6040;
+    line-height: 1.5;
+  }
+
+  .link-arrow {
+    font-size: 18px;
+    color: rgba(201,146,42,0.35);
+    flex-shrink: 0;
+    transition: color 0.3s, transform 0.3s;
+  }
+
+  .link-card:hover .link-arrow {
+    color: var(--gold-light);
+    transform: translateX(3px);
+  }
+
+  /* 戻るリンク */
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: #7a6040;
+    font-size: 13px;
+    margin-top: 12px;
+    padding: 8px 16px;
+    border: 1px solid rgba(201,146,42,0.2);
+    border-radius: 3px;
+    transition: all 0.3s;
+    letter-spacing: 1px;
+  }
+
+  .back-link:hover {
+    color: var(--gold-light);
+    border-color: rgba(201,146,42,0.5);
+    background: rgba(201,146,42,0.06);
+  }
+
+  /* フォーム */
+  .form-card {
+    background: linear-gradient(135deg, rgba(26,48,32,0.55), rgba(15,20,35,0.45));
+    border: 1px solid rgba(201,146,42,0.25);
+    border-radius: 4px;
+    padding: 28px 32px;
+    margin-bottom: 32px;
+    position: relative;
+  }
+
+  .form-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--gold), transparent);
+    border-radius: 4px 0 0 4px;
+  }
+
+  .form-intro {
+    font-size: 13px;
+    color: #a89060;
+    line-height: 1.9;
+    margin-bottom: 24px;
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 12px;
+    color: #7a6040;
+    letter-spacing: 2px;
+    margin-bottom: 7px;
+    font-family: 'Cinzel', serif;
+  }
+
+  .required {
+    color: #c06070;
+    font-style: normal;
+  }
+
+  .form-input,
+  .form-textarea {
+    width: 100%;
+    background: rgba(10,8,4,0.6);
+    border: 1px solid rgba(201,146,42,0.25);
+    border-radius: 3px;
+    color: #e8d5a3;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 14px;
+    padding: 10px 14px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    outline: none;
+  }
+
+  .form-input::placeholder,
+  .form-textarea::placeholder {
+    color: #4a3828;
+  }
+
+  .form-input:focus,
+  .form-textarea:focus {
+    border-color: rgba(201,146,42,0.6);
+    box-shadow: 0 0 10px rgba(201,146,42,0.12);
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 140px;
+  }
+
+  .field-error {
+    display: block;
+    font-size: 11px;
+    color: #c06070;
+    margin-top: 5px;
+    letter-spacing: 0.5px;
+  }
+
+  .form-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, rgba(42,72,53,0.8), rgba(26,48,32,0.9));
+    border: 1px solid rgba(201,146,42,0.45);
+    border-radius: 3px;
+    color: var(--gold-light);
+    font-family: 'Noto Serif JP', serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    padding: 11px 28px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 8px;
+  }
+
+  .form-submit:hover {
+    background: linear-gradient(135deg, rgba(60,100,70,0.85), rgba(42,72,53,0.9));
+    border-color: var(--gold);
+    box-shadow: 0 0 14px rgba(201,146,42,0.25);
+  }
+
+  .form-submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .form-success {
+    background: rgba(26,60,32,0.6);
+    border: 1px solid rgba(201,146,42,0.4);
+    border-radius: 3px;
+    padding: 16px 20px;
+    text-align: center;
+    color: var(--gold-light);
+    font-size: 14px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+
+  .form-success-icon {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: var(--gold);
+  }
+
+  .form-error-global {
+    background: rgba(122,26,46,0.2);
+    border: 1px solid rgba(122,26,46,0.4);
+    border-radius: 3px;
+    padding: 12px 16px;
+    color: #c06070;
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+
+  @media (max-width: 768px) {
+    .menu-toggle { display: block; }
+
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 56px; right: 0;
+      width: 200px;
+      background: #0f2018;
+      border: 1px solid rgba(201,146,42,0.3);
+      border-radius: 0 0 8px 8px;
+      padding: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    .nav-links.active { display: flex; }
+
+    .main-wrap { padding: 0 16px 60px; }
+
+    .link-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+
+<body>
+
+<header class="page-header">
+  <h1>リンク</h1>
+  <p class="subtitle">— Links & Contact —</p>
+  <p class="lead">ご連絡は以下のSNSからお願いします。</p>
+</header>
+
+<main class="main-wrap">
+
+  <p class="section-label">漫画・イラスト掲載サイト</p>
+  <div class="link-grid">
+
+    <a class="link-card" href="https://rookie.shonenjump.com/users/14728546961183734555" target="_blank" rel="noopener">
+      <div class="link-icon">📚</div>
+      <div class="link-text">
+        <span class="link-name">ジャンプルーキー</span>
+        <span class="link-desc">オリジナル漫画を掲載中</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://daysneo.com/author/Sam333333Sam/" target="_blank" rel="noopener">
+      <div class="link-icon">🌙</div>
+      <div class="link-text">
+        <span class="link-name">DaysNEO</span>
+        <span class="link-desc">漫画掲載サイト</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://www.pixiv.net/users/105728284" target="_blank" rel="noopener">
+      <div class="link-icon">🎨</div>
+      <div class="link-text">
+        <span class="link-name">Pixiv</span>
+        <span class="link-desc">二次創作はこちらに掲載</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+  </div>
+
+  <p class="section-label">SNS・その他</p>
+  <div class="link-grid">
+
+    <a class="link-card" href="https://bsky.app/profile/azaleaazalea88.bsky.social" target="_blank" rel="noopener">
+      <div class="link-icon">🦋</div>
+      <div class="link-text">
+        <span class="link-name">Bluesky</span>
+        <span class="link-desc">近況・作品のお知らせ</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://kakuyomu.jp/users/azalea_azalea72" target="_blank" rel="noopener">
+      <div class="link-icon">✒️</div>
+      <div class="link-text">
+        <span class="link-name">カクヨム</span>
+        <span class="link-desc">小説を掲載中</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://www.youtube.com/@LilyPopins0512" target="_blank" rel="noopener">
+      <div class="link-icon">🎬</div>
+      <div class="link-text">
+        <span class="link-name">YouTube（リリポピ）</span>
+        <span class="link-desc">動画チャンネル</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://lilipopi.github.io/lilypopins/" target="_blank" rel="noopener">
+      <div class="link-icon">🌸</div>
+      <div class="link-text">
+        <span class="link-name">リリポピのホームページ</span>
+        <span class="link-desc">別サイト</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+  </div>
+
+  <p class="section-label">Azalea72のホームページ</p>
+  <div class="link-grid">
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/storyreviewazalea/" target="_blank" rel="noopener">
+      <div class="link-icon">📖</div>
+      <div class="link-text">
+        <span class="link-name">書評サイト</span>
+        <span class="link-desc">本・アニメ・映画・ゲーム・小説の備忘録</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-english/" target="_blank" rel="noopener">
+      <div class="link-icon">🍔</div>
+      <div class="link-text">
+        <span class="link-name">英語サイト（English Site）</span>
+        <span class="link-desc">英語話者と英語学習者に向けたサイト</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-watercolor/" target="_blank" rel="noopener">
+      <div class="link-icon">☁️</div>
+      <div class="link-text">
+        <span class="link-name">水彩画サイト</span>
+        <span class="link-desc">水彩画掲載</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+  </div>
+
+  <p class="section-label">お問い合わせフォーム</p>
+
+  <div class="form-card">
+    <p class="form-intro">ご質問・ご感想などはこちらからどうぞ。<br>Gmailで受け取り、返信いたします。</p>
+
+    <div data-fs-success class="form-success" style="display:none;">
+      <span class="form-success-icon">✦</span>
+      <p>メッセージを送信しました。ありがとうございます！</p>
+    </div>
+
+    <div data-fs-error class="form-error-global" style="display:none;"></div>
+
+    <form id="contact-form" action="https://formspree.io/f/maqvpvoz" method="POST">
+
+      <div class="form-group">
+        <label class="form-label" for="name">お名前</label>
+        <input class="form-input" type="text" id="name" name="name" placeholder="Azalea72" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="email">メールアドレス <span class="required">*</span></label>
+        <input class="form-input" type="email" id="email" name="email" data-fs-field placeholder="example@email.com" required>
+        <span data-fs-error="email" class="field-error"></span>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="message">メッセージ <span class="required">*</span></label>
+        <textarea class="form-textarea" id="message" name="message" data-fs-field placeholder="メッセージを入力してください…" rows="6" required></textarea>
+        <span data-fs-error="message" class="field-error"></span>
+      </div>
+
+      <button class="form-submit" type="submit" data-fs-submit-btn>
+        <span class="submit-icon">📮</span> 送信する
+      </button>
+
+    </form>
+  </div>
+
+  <a class="back-link" href="index.html">← トップページに戻る</a>
+
+</main>
+  
+<script>
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('active');
+  }
+
+  window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+  formspree('initForm', { formElement: '#contact-form', formId: 'maqvpvoz' });
+</script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+
+</body>
+</html>
