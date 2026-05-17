@@ -9,111 +9,135 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Noto+Serif+JP:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --gold: #c9922a;
-    --gold-light: #e8c060;
-    --ink-bg: #1a0e08;
+    --gold: #d4a843;
+    --gold-light: #f0d080;
+    --gold-mid: #e8b84d;
+    --ink-bg: #1a0505;
+    --card-bg-a: rgba(40, 70, 50, 0.55);
+    --card-bg-b: rgba(30, 40, 65, 0.45);
+    --text-primary: #f5e8c0;
+    --text-muted: #a08858;
+    --text-dim: #7a6545;
+    --accent-bar: linear-gradient(180deg, #e8c060, #c9922a80);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
     font-family: 'Noto Serif JP', 'メイリオ', serif;
-    background-color: var(--ink-bg);
-    background-image:
-      radial-gradient(ellipse at 20% 20%, rgba(42,24,14,0.8) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 80%, rgba(45,26,74,0.4) 0%, transparent 60%),
-      repeating-linear-gradient(
-        45deg, transparent, transparent 40px,
-        rgba(201,146,42,0.03) 40px, rgba(201,146,42,0.03) 41px
-      );
+    background-color: #2a0000;
+    background-image: repeating-conic-gradient(#3d0000 0% 25%, #1a0000 0% 50%);
+    background-size: 48px 48px;
     background-attachment: fixed;
-    color: #e8d5a3;
+    color: var(--text-primary);
     min-height: 100vh;
   }
-  
+
   /* ページヘッダー */
   .page-header {
     text-align: center;
-    padding: 52px 24px 36px;
+    padding: 60px 24px 44px;
   }
 
   .page-header::before {
     content: '';
     display: block;
-    width: 200px;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    margin: 0 auto 28px;
+    width: 240px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+    margin: 0 auto 32px;
+    opacity: 0.8;
   }
 
   .page-header h1 {
     font-family: 'Cinzel', serif;
-    font-size: 26px;
+    font-size: 28px;
     color: var(--gold-light);
-    letter-spacing: 4px;
-    text-shadow: 0 0 16px rgba(201,146,42,0.4);
+    letter-spacing: 6px;
+    text-shadow: 0 0 24px rgba(232,184,77,0.5), 0 0 48px rgba(201,146,42,0.2);
     margin-bottom: 8px;
   }
 
   .page-header .subtitle {
-    font-size: 12px;
-    color: #7a6040;
-    letter-spacing: 3px;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 4px;
+    margin-top: 6px;
   }
 
   .page-header .lead {
     font-size: 13px;
-    color: #a89060;
-    margin-top: 14px;
+    color: #c0a878;
+    margin-top: 20px;
     letter-spacing: 1px;
+    line-height: 2;
+    opacity: 0.85;
+  }
+
+  .page-header::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 24px auto 0;
+    opacity: 0.4;
   }
 
   /* メインコンテンツ */
   .main-wrap {
-    max-width: 900px;
+    max-width: 940px;
     margin: 0 auto;
-    padding: 0 24px 80px;
+    padding: 8px 24px 80px;
   }
 
   /* セクション見出し */
   .section-label {
     font-family: 'Cinzel', serif;
-    font-size: 11px;
-    color: #7a6040;
-    letter-spacing: 4px;
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 5px;
     text-transform: uppercase;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
+    padding-top: 32px;
+  }
+
+  .section-label::before {
+    content: '◆';
+    font-size: 7px;
+    color: var(--gold);
+    opacity: 0.6;
   }
 
   .section-label::after {
     content: '';
     flex: 1;
     height: 1px;
-    background: linear-gradient(90deg, rgba(201,146,42,0.3), transparent);
+    background: linear-gradient(90deg, rgba(212,168,67,0.35), transparent);
   }
 
   /* リンクグリッド */
   .link-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 14px;
-    margin-bottom: 40px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 10px;
+    margin-bottom: 8px;
   }
 
   /* リンクカード */
   .link-card {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
     text-decoration: none;
-    background: linear-gradient(135deg, rgba(26,48,32,0.55), rgba(15,20,35,0.45));
-    border: 1px solid rgba(201,146,42,0.2);
-    border-radius: 4px;
-    padding: 16px 18px;
-    transition: all 0.3s;
+    background: linear-gradient(135deg, rgba(50, 80, 58, 0.5), rgba(25, 32, 58, 0.5));
+    border: 1px solid rgba(212,168,67,0.22);
+    border-radius: 5px;
+    padding: 14px 16px;
+    transition: all 0.25s ease;
     position: relative;
     overflow: hidden;
   }
@@ -123,51 +147,70 @@
     position: absolute;
     left: 0; top: 0; bottom: 0;
     width: 3px;
-    background: linear-gradient(180deg, var(--gold), transparent);
-    border-radius: 4px 0 0 4px;
+    background: var(--accent-bar);
+    border-radius: 5px 0 0 5px;
+    opacity: 0.75;
+  }
+
+  .link-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(232,184,77,0.04), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.25s;
   }
 
   .link-card:hover {
-    border-color: rgba(201,146,42,0.55);
+    border-color: rgba(232,184,77,0.5);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.35), 0 0 12px rgba(201,146,42,0.1);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4), 0 0 16px rgba(212,168,67,0.12);
   }
 
+  .link-card:hover::after { opacity: 1; }
+
   .link-icon {
-    font-size: 26px;
+    font-size: 22px;
     flex-shrink: 0;
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(201,146,42,0.08);
-    border: 1px solid rgba(201,146,42,0.2);
-    border-radius: 3px;
+    background: rgba(212,168,67,0.1);
+    border: 1px solid rgba(212,168,67,0.22);
+    border-radius: 4px;
+    transition: background 0.25s;
+  }
+
+  .link-card:hover .link-icon {
+    background: rgba(212,168,67,0.18);
   }
 
   .link-text { flex: 1; min-width: 0; }
 
   .link-name {
     display: block;
-    font-size: 14px;
+    font-size: 13.5px;
     font-weight: 600;
     color: var(--gold-light);
     margin-bottom: 3px;
+    letter-spacing: 0.3px;
   }
 
   .link-desc {
     display: block;
     font-size: 11px;
-    color: #7a6040;
+    color: var(--text-muted);
     line-height: 1.5;
   }
 
   .link-arrow {
-    font-size: 18px;
-    color: rgba(201,146,42,0.35);
+    font-size: 20px;
+    color: rgba(212,168,67,0.3);
     flex-shrink: 0;
-    transition: color 0.3s, transform 0.3s;
+    transition: color 0.25s, transform 0.25s;
+    line-height: 1;
   }
 
   .link-card:hover .link-arrow {
@@ -175,67 +218,29 @@
     transform: translateX(3px);
   }
 
-  /* 戻るリンク */
-  .back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    text-decoration: none;
-    color: #7a6040;
-    font-size: 13px;
-    margin-top: 12px;
-    padding: 8px 16px;
-    border: 1px solid rgba(201,146,42,0.2);
-    border-radius: 3px;
-    transition: all 0.3s;
-    letter-spacing: 1px;
-  }
-
-  .back-link:hover {
-    color: var(--gold-light);
-    border-color: rgba(201,146,42,0.5);
-    background: rgba(201,146,42,0.06);
-  }
-
   @media (max-width: 768px) {
-    .menu-toggle { display: block; }
-
-    .nav-links {
-      display: none;
-      flex-direction: column;
-      position: absolute;
-      top: 56px; right: 0;
-      width: 200px;
-      background: #0f2018;
-      border: 1px solid rgba(201,146,42,0.3);
-      border-radius: 0 0 8px 8px;
-      padding: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    }
-
-    .nav-links.active { display: flex; }
-
     .main-wrap { padding: 0 16px 60px; }
-
     .link-grid { grid-template-columns: 1fr; }
+    .page-header { padding: 44px 20px 32px; }
   }
 </style>
 </head>
 
 <body>
-  
+
 <header class="page-header">
   <h1>リンク</h1>
   <p class="subtitle">— Links & Contact —</p>
   <p class="lead">The more boring you are in real life,<br>
     the less people are interested in you.<br>
-  Sadly I tell people I have an extraordinary life.<br>
-  It's actually incredibly exciting.</p>
+    Sadly I tell people I have an extraordinary life.<br>
+    It's actually incredibly exciting.</p>
 </header>
 
 <main class="main-wrap">
 
-  <p class="section-label">漫画・イラスト掲載サイト</p>
+  <!-- オリジナル創作 -->
+  <p class="section-label">🖋️ オリジナル創作</p>
   <div class="link-grid">
 
     <a class="link-card" href="https://rookie.shonenjump.com/users/14728546961183734555" target="_blank" rel="noopener">
@@ -256,29 +261,6 @@
       <span class="link-arrow">›</span>
     </a>
 
-    <a class="link-card" href="https://www.pixiv.net/users/105728284" target="_blank" rel="noopener">
-      <div class="link-icon">🎨</div>
-      <div class="link-text">
-        <span class="link-name">Pixiv</span>
-        <span class="link-desc">二次創作はこちらに掲載</span>
-      </div>
-      <span class="link-arrow">›</span>
-    </a>
-
-  </div>
-
-  <p class="section-label">SNS・その他</p>
-  <div class="link-grid">
-
-    <a class="link-card" href="https://bsky.app/profile/azaleaazalea88.bsky.social" target="_blank" rel="noopener">
-      <div class="link-icon">🦋</div>
-      <div class="link-text">
-        <span class="link-name">Bluesky</span>
-        <span class="link-desc">近況・作品のお知らせ</span>
-      </div>
-      <span class="link-arrow">›</span>
-    </a>
-
     <a class="link-card" href="https://kakuyomu.jp/users/azalea_azalea72" target="_blank" rel="noopener">
       <div class="link-icon">✒️</div>
       <div class="link-text">
@@ -288,115 +270,17 @@
       <span class="link-arrow">›</span>
     </a>
 
-    <a class="link-card" href="https://www.youtube.com/@LilyPopins0512" target="_blank" rel="noopener">
-      <div class="link-icon">🎬</div>
-      <div class="link-text">
-        <span class="link-name">YouTube（リリポピ）</span>
-        <span class="link-desc">動画チャンネル</span>
-      </div>
-      <span class="link-arrow">›</span>
-    </a>
-
-    <a class="link-card" href="https://lilipopi.github.io/lilypopins/" target="_blank" rel="noopener">
-      <div class="link-icon">🌸</div>
-      <div class="link-text">
-        <span class="link-name">リリポピのホームページ</span>
-        <span class="link-desc">別サイト</span>
-      </div>
-      <span class="link-arrow">›</span>
-    </a>
-
   </div>
 
-  <p class="section-label">Azalea72のホームページ</p>
+  <!-- イラスト・二次創作 -->
+  <p class="section-label">🎨 イラスト・二次創作</p>
   <div class="link-grid">
 
-    <a class="link-card" href="https://azaleacreativeroom888.github.io/Azaleamangaroom/" target="_blank" rel="noopener">
-      <div class="link-icon">🖋️</div>
+    <a class="link-card" href="https://www.pixiv.net/users/105728284" target="_blank" rel="noopener">
+      <div class="link-icon">🎨</div>
       <div class="link-text">
-        <span class="link-name">漫画紹介サイト</span>
-        <span class="link-desc">漫画掲載</span>
-      </div>
-      <span class="link-arrow">›</span>
-    </a>
-
-    <a class="link-card" href="https://azaleacreativeroom888.github.io/storyreviewazalea/" target="_blank" rel="noopener">
-      <div class="link-icon">📖</div>
-      <div class="link-text">
-        <span class="link-name">書評サイト</span>
-        <span class="link-desc">備忘録</span>
-      </div>
-      <span class="link-arrow">›</span>
-    </a>
-
-    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-english/" target="_blank" rel="noopener">
-      <div class="link-icon">🍔</div>
-      <div class="link-text">
-        <span class="link-name">英語サイト</span>
-        <span class="link-desc">English Site</span>
-      </div>
-      <span class="link-arrow">›</span>
-    </a>
-
-    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-watercolor/" target="_blank" rel="noopener">
-      <div class="link-icon">☁️</div>
-      <div class="link-text">
-        <span class="link-name">水彩画サイト</span>
-        <span class="link-desc">水彩画掲載</span>
-      </div>
-      <span class="link-arrow">›</span>
-    </a>
-
-    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-italian/" target="_blank" rel="noopener">
-      <div class="link-icon">🍕</div>
-      <div class="link-text">
-        <span class="link-name">イタリア語サイト</span>
-        <span class="link-desc">Sito in italiano</span>
-      </div>
-      <span class="link-arrow">›</span>
-    </a>
-
-    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-franch/" target="_blank" rel="noopener">
-      <div class="link-icon">🥖</div>
-      <div class="link-text">
-        <span class="link-name">フランス語サイト</span>
-        <span class="link-desc">site web en français</span>
-      </div>
-      <span class="link-arrow">›</span>
-    </a>
-
-    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-dutch/" target="_blank" rel="noopener">
-      <div class="link-icon">🍺</div>
-      <div class="link-text">
-        <span class="link-name">ドイツ語サイト</span>
-        <span class="link-desc">eine Website auf Deutsch</span>
-      </div>
-      <span class="link-arrow">›</span>
-    </a>
-
-    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-spanish/" target="_blank" rel="noopener">
-      <div class="link-icon">💃</div>
-      <div class="link-text">
-        <span class="link-name">スペイン語サイト</span>
-        <span class="link-desc">sitio web en español</span>
-      </div>
-      <span class="link-arrow">›</span>
-    </a>
-
-    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-finnish/" target="_blank" rel="noopener">
-      <div class="link-icon">❄️</div>
-      <div class="link-text">
-        <span class="link-name">フィンランド語サイト</span>
-        <span class="link-desc">Sivusto suomeksi</span>
-      </div>
-      <span class="link-arrow">›</span>
-    </a>
-    
-    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-swedish/" target="_blank" rel="noopener">
-      <div class="link-icon">🏔️</div>
-      <div class="link-text">
-        <span class="link-name">スウェーデン語サイト</span>
-        <span class="link-desc">Webbplats på svenska</span>
+        <span class="link-name">Pixiv</span>
+        <span class="link-desc">二次創作はこちらに掲載</span>
       </div>
       <span class="link-arrow">›</span>
     </a>
@@ -454,16 +338,41 @@
       </div>
       <span class="link-arrow">›</span>
     </a>
-    
+
   </div>
 
-  <p class="section-label">動画サイト</p>
+  <!-- SNS -->
+  <p class="section-label">🦋 SNS</p>
   <div class="link-grid">
+
+    <a class="link-card" href="https://bsky.app/profile/azaleaazalea88.bsky.social" target="_blank" rel="noopener">
+      <div class="link-icon">🦋</div>
+      <div class="link-text">
+        <span class="link-name">Bluesky</span>
+        <span class="link-desc">近況・作品のお知らせ</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+  </div>
+
+  <!-- 動画 -->
+  <p class="section-label">📺 動画</p>
+  <div class="link-grid">
+
+    <a class="link-card" href="https://www.youtube.com/@LilyPopins0512" target="_blank" rel="noopener">
+      <div class="link-icon">🎬</div>
+      <div class="link-text">
+        <span class="link-name">YouTube（リリポピ）</span>
+        <span class="link-desc">動画チャンネル</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
 
     <a class="link-card" href="https://youtube.com/shorts/FpDWFoHOzi0?si=KNH6qyuIgjRE0uU3" target="_blank" rel="noopener">
       <div class="link-icon">▶️</div>
       <div class="link-text">
-        <span class="link-name">YouTube</span>
+        <span class="link-name">YouTube（ショート）</span>
         <span class="link-desc">動画投稿サイト</span>
       </div>
       <span class="link-arrow">›</span>
@@ -486,16 +395,123 @@
       </div>
       <span class="link-arrow">›</span>
     </a>
-    
+
+  </div>
+
+  <!-- 語学サイト -->
+  <p class="section-label">🗣️ 語学サイト</p>
+  <div class="link-grid">
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-english/" target="_blank" rel="noopener">
+      <div class="link-icon">🍔</div>
+      <div class="link-text">
+        <span class="link-name">英語サイト</span>
+        <span class="link-desc">English Site</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-italian/" target="_blank" rel="noopener">
+      <div class="link-icon">🍕</div>
+      <div class="link-text">
+        <span class="link-name">イタリア語サイト</span>
+        <span class="link-desc">Sito in italiano</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-franch/" target="_blank" rel="noopener">
+      <div class="link-icon">🥖</div>
+      <div class="link-text">
+        <span class="link-name">フランス語サイト</span>
+        <span class="link-desc">site web en français</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-dutch/" target="_blank" rel="noopener">
+      <div class="link-icon">🍺</div>
+      <div class="link-text">
+        <span class="link-name">ドイツ語サイト</span>
+        <span class="link-desc">eine Website auf Deutsch</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-spanish/" target="_blank" rel="noopener">
+      <div class="link-icon">💃</div>
+      <div class="link-text">
+        <span class="link-name">スペイン語サイト</span>
+        <span class="link-desc">sitio web en español</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-finnish/" target="_blank" rel="noopener">
+      <div class="link-icon">❄️</div>
+      <div class="link-text">
+        <span class="link-name">フィンランド語サイト</span>
+        <span class="link-desc">Sivusto suomeksi</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-swedish/" target="_blank" rel="noopener">
+      <div class="link-icon">🏔️</div>
+      <div class="link-text">
+        <span class="link-name">スウェーデン語サイト</span>
+        <span class="link-desc">Webbplats på svenska</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+  </div>
+
+  <!-- その他マイサイト -->
+  <p class="section-label">🏠 その他マイサイト</p>
+  <div class="link-grid">
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/Azaleamangaroom/" target="_blank" rel="noopener">
+      <div class="link-icon">🖋️</div>
+      <div class="link-text">
+        <span class="link-name">漫画紹介サイト</span>
+        <span class="link-desc">漫画掲載</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/storyreviewazalea/" target="_blank" rel="noopener">
+      <div class="link-icon">📖</div>
+      <div class="link-text">
+        <span class="link-name">書評サイト</span>
+        <span class="link-desc">備忘録</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-watercolor/" target="_blank" rel="noopener">
+      <div class="link-icon">☁️</div>
+      <div class="link-text">
+        <span class="link-name">水彩画サイト</span>
+        <span class="link-desc">水彩画掲載</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://lilipopi.github.io/lilypopins/" target="_blank" rel="noopener">
+      <div class="link-icon">🌸</div>
+      <div class="link-text">
+        <span class="link-name">リリポピのホームページ</span>
+        <span class="link-desc">別サイト</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
   </div>
 
 </main>
-  
-<script>
-  function toggleMenu() {
-    document.getElementById('navLinks').classList.toggle('active');
-  }
 
+<script>
   window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
   formspree('initForm', { formElement: '#contact-form', formId: 'maqvpvoz' });
 </script>
