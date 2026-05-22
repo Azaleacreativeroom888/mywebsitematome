@@ -13,8 +13,6 @@
     --gold-light: #f0d080;
     --gold-mid: #e8b84d;
     --ink-bg: #1a0505;
-    --card-bg-a: rgba(40, 70, 50, 0.55);
-    --card-bg-b: rgba(30, 40, 65, 0.45);
     --text-primary: #f5e8c0;
     --text-muted: #a08858;
     --text-dim: #7a6545;
@@ -33,7 +31,6 @@
     min-height: 100vh;
   }
 
-  /* ページヘッダー */
   .page-header {
     text-align: center;
     padding: 60px 24px 44px;
@@ -65,6 +62,567 @@
     margin-top: 6px;
   }
 
+  .page-header .lead {
+    font-size: 13px;
+    color: #c0a878;
+    margin-top: 20px;
+    letter-spacing: 1px;
+    line-height: 2;
+    opacity: 0.85;
+  }
+
+  .page-header::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 24px auto 0;
+    opacity: 0.4;
+  }
+
+  .main-wrap {
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 8px 24px 80px;
+  }
+
+  .section-label {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gold-light);
+    letter-spacing: 3px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 36px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(212,168,67,0.4), transparent);
+  }
+
+  .link-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .link-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    background: linear-gradient(135deg, rgba(50, 80, 58, 0.5), rgba(25, 32, 58, 0.5));
+    border: 1px solid rgba(212,168,67,0.22);
+    border-radius: 5px;
+    padding: 14px 16px;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .link-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent-bar);
+    border-radius: 5px 0 0 5px;
+    opacity: 0.75;
+  }
+
+  .link-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(232,184,77,0.04), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .link-card:hover {
+    border-color: rgba(232,184,77,0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4), 0 0 16px rgba(212,168,67,0.12);
+  }
+
+  .link-card:hover::after { opacity: 1; }
+
+  .link-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(212,168,67,0.1);
+    border: 1px solid rgba(212,168,67,0.22);
+    border-radius: 4px;
+    transition: background 0.25s;
+  }
+
+  .link-card:hover .link-icon {
+    background: rgba(212,168,67,0.18);
+  }
+
+  .link-text { flex: 1; min-width: 0; }
+
+  .link-name {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--gold-light);
+    margin-bottom: 3px;
+    letter-spacing: 0.3px;
+  }
+
+  .link-desc {
+    display: block;
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .link-arrow {
+    font-size: 20px;
+    color: rgba(212,168,67,0.3);
+    flex-shrink: 0;
+    transition: color 0.25s, transform 0.25s;
+    line-height: 1;
+  }
+
+  .link-card:hover .link-arrow {
+    color: var(--gold-light);
+    transform: translateX(3px);
+  }
+
+  @media (max-width: 768px) {
+    .main-wrap { padding: 0 16px 60px; }
+    .link-grid { grid-template-columns: 1fr; }
+    .page-header { padding: 44px 20px 32px; }
+  }
+</style>
+</head>
+
+<body>
+
+<header class="page-header">
+  <h1>リンク</h1>
+  <p class="subtitle">— Links & Contact —</p>
+  <p class="lead">The more boring you are in real life,<br>
+    the less people are interested in you.<br>
+    Sadly I tell people I have an extraordinary life.<br>
+    It's actually incredibly exciting.</p>
+</header>
+
+<main class="main-wrap">
+
+  <!-- オリジナル創作 -->
+  <p class="section-label">🖋️ オリジナル創作</p>
+  <div class="link-grid">
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/Azaleamangaroom/" target="_blank" rel="noopener">
+      <div class="link-icon">🖼️</div>
+      <div class="link-text">
+        <span class="link-name">漫画紹介サイト</span>
+        <span class="link-desc">漫画掲載</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://rookie.shonenjump.com/users/14728546961183734555" target="_blank" rel="noopener">
+      <div class="link-icon">📚</div>
+      <div class="link-text">
+        <span class="link-name">ジャンプルーキー</span>
+        <span class="link-desc">オリジナル漫画を掲載中</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://daysneo.com/author/Sam333333Sam/" target="_blank" rel="noopener">
+      <div class="link-icon">🌙</div>
+      <div class="link-text">
+        <span class="link-name">DaysNEO</span>
+        <span class="link-desc">漫画掲載サイト</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://kakuyomu.jp/users/azalea_azalea72" target="_blank" rel="noopener">
+      <div class="link-icon">✒️</div>
+      <div class="link-text">
+        <span class="link-name">カクヨム</span>
+        <span class="link-desc">小説を掲載中</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://www.pixiv.net/users/105728284" target="_blank" rel="noopener">
+      <div class="link-icon">🎨</div>
+      <div class="link-text">
+        <span class="link-name">Pixiv</span>
+        <span class="link-desc">イラスト・二次創作掲載</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://bsky.app/profile/azaleaazalea88.bsky.social" target="_blank" rel="noopener">
+      <div class="link-icon">🦋</div>
+      <div class="link-text">
+        <span class="link-name">Bluesky</span>
+        <span class="link-desc">近況・作品のお知らせ</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+  </div>
+
+  <!-- イラスト・二次創作 -->
+  <p class="section-label">🎨 イラスト・二次創作</p>
+  <div class="link-grid">
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-naruto/" target="_blank" rel="noopener">
+      <div class="link-icon">🍥</div>
+      <div class="link-text">
+        <span class="link-name">NARUTOファンサイト</span>
+        <span class="link-desc">二次創作サイト</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-goldenkamuy/" target="_blank" rel="noopener">
+      <div class="link-icon">🐺</div>
+      <div class="link-text">
+        <span class="link-name">ゴールデンカムイファンサイト</span>
+        <span class="link-desc">二次創作サイト</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-mushokutensei/" target="_blank" rel="noopener">
+      <div class="link-icon">🪄</div>
+      <div class="link-text">
+        <span class="link-name">無職転生ファンサイト</span>
+        <span class="link-desc">二次創作サイト</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-pixar/" target="_blank" rel="noopener">
+      <div class="link-icon">🎬</div>
+      <div class="link-text">
+        <span class="link-name">ピクサーファンサイト</span>
+        <span class="link-desc">二次創作サイト</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-starwars/" target="_blank" rel="noopener">
+      <div class="link-icon">🚀</div>
+      <div class="link-text">
+        <span class="link-name">スターウォーズファンサイト</span>
+        <span class="link-desc">二次創作サイト</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-harrypotter/" target="_blank" rel="noopener">
+      <div class="link-icon">🦉</div>
+      <div class="link-text">
+        <span class="link-name">ハリーポッターファンサイト</span>
+        <span class="link-desc">二次創作サイト</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-digimon/" target="_blank" rel="noopener">
+      <div class="link-icon">🥚</div>
+      <div class="link-text">
+        <span class="link-name">デジモンファンサイト</span>
+        <span class="link-desc">二次創作サイト</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-pokemon/" target="_blank" rel="noopener">
+      <div class="link-icon">⚡</div>
+      <div class="link-text">
+        <span class="link-name">ポケモンファンサイト</span>
+        <span class="link-desc">二次創作サイト</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-beyblade/" target="_blank" rel="noopener">
+      <div class="link-icon">🌀</div>
+      <div class="link-text">
+        <span class="link-name">ベイブレードファンサイト</span>
+        <span class="link-desc">二次創作サイト</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-dragonquest/" target="_blank" rel="noopener">
+      <div class="link-icon">🗡️</div>
+      <div class="link-text">
+        <span class="link-name">ドラクエファンサイト</span>
+        <span class="link-desc">二次創作サイト</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-batman/" target="_blank" rel="noopener">
+      <div class="link-icon">🦇</div>
+      <div class="link-text">
+        <span class="link-name">バットマンファンサイト</span>
+        <span class="link-desc">二次創作サイト</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-indivisible/" target="_blank" rel="noopener">
+      <div class="link-icon">⚔️</div>
+      <div class="link-text">
+        <span class="link-name">インディビジブルサイト</span>
+        <span class="link-desc">二次創作サイト</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+  </div>
+
+  <!-- 語学サイト -->
+  <p class="section-label">🗣️ 語学サイト</p>
+  <div class="link-grid">
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-english/" target="_blank" rel="noopener">
+      <div class="link-icon">🇬🇧</div>
+      <div class="link-text">
+        <span class="link-name">英語サイト</span>
+        <span class="link-desc">English Site</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-italian/" target="_blank" rel="noopener">
+      <div class="link-icon">🇮🇹</div>
+      <div class="link-text">
+        <span class="link-name">イタリア語サイト</span>
+        <span class="link-desc">Sito in italiano</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-franch/" target="_blank" rel="noopener">
+      <div class="link-icon">🇫🇷</div>
+      <div class="link-text">
+        <span class="link-name">フランス語サイト</span>
+        <span class="link-desc">Site web en français</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-germany/" target="_blank" rel="noopener">
+      <div class="link-icon">🇩🇪</div>
+      <div class="link-text">
+        <span class="link-name">ドイツ語サイト</span>
+        <span class="link-desc">Eine Website auf Deutsch</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-spanish/" target="_blank" rel="noopener">
+      <div class="link-icon">🇪🇸</div>
+      <div class="link-text">
+        <span class="link-name">スペイン語サイト</span>
+        <span class="link-desc">Sitio web en español</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-dutch/" target="_blank" rel="noopener">
+      <div class="link-icon">🇳🇱</div>
+      <div class="link-text">
+        <span class="link-name">オランダ語サイト</span>
+        <span class="link-desc">Nederlandse website</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-finnish/" target="_blank" rel="noopener">
+      <div class="link-icon">🇫🇮</div>
+      <div class="link-text">
+        <span class="link-name">フィンランド語サイト</span>
+        <span class="link-desc">Sivusto suomeksi</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-swedish/" target="_blank" rel="noopener">
+      <div class="link-icon">🇸🇪</div>
+      <div class="link-text">
+        <span class="link-name">スウェーデン語サイト</span>
+        <span class="link-desc">Webbplats på svenska</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-japanese/" target="_blank" rel="noopener">
+      <div class="link-icon">🇯🇵</div>
+      <div class="link-text">
+        <span class="link-name">日本語サイト</span>
+        <span class="link-desc">日本語のサイト</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-polish/" target="_blank" rel="noopener">
+      <div class="link-icon">🇵🇱</div>
+      <div class="link-text">
+        <span class="link-name">ポーランド語サイト</span>
+        <span class="link-desc">Strona po polsku</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-czach/" target="_blank" rel="noopener">
+      <div class="link-icon">🇨🇿</div>
+      <div class="link-text">
+        <span class="link-name">チェコ語サイト</span>
+        <span class="link-desc">Stránka v češtině</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-hungarian/" target="_blank" rel="noopener">
+      <div class="link-icon">🇭🇺</div>
+      <div class="link-text">
+        <span class="link-name">ハンガリー語サイト</span>
+        <span class="link-desc">Magyar nyelvű weboldal</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-danish/" target="_blank" rel="noopener">
+      <div class="link-icon">🇩🇰</div>
+      <div class="link-text">
+        <span class="link-name">デンマーク語サイト</span>
+        <span class="link-desc">Hjemmeside på dansk</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-icelandic/" target="_blank" rel="noopener">
+      <div class="link-icon">🇮🇸</div>
+      <div class="link-text">
+        <span class="link-name">アイスランド語サイト</span>
+        <span class="link-desc">Vefsíða á íslensku</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-portuguese/" target="_blank" rel="noopener">
+      <div class="link-icon">🇵🇹</div>
+      <div class="link-text">
+        <span class="link-name">ポルトガル語サイト</span>
+        <span class="link-desc">Site em português</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+  </div>
+
+  <!-- 書評サイト -->
+  <p class="section-label">📝 書評・レビューサイト</p>
+  <div class="link-grid">
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/storyreviewazalea/" target="_blank" rel="noopener">
+      <div class="link-icon">📖</div>
+      <div class="link-text">
+        <span class="link-name">書評サイト（総合）</span>
+        <span class="link-desc">備忘録</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-mystery/" target="_blank" rel="noopener">
+      <div class="link-icon">🔍</div>
+      <div class="link-text">
+        <span class="link-name">ミステリー書評</span>
+        <span class="link-desc">ミステリー・推理小説</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-SF/" target="_blank" rel="noopener">
+      <div class="link-icon">🛸</div>
+      <div class="link-text">
+        <span class="link-name">SF書評</span>
+        <span class="link-desc">サイエンスフィクション</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-jidaigeki/" target="_blank" rel="noopener">
+      <div class="link-icon">⛩️</div>
+      <div class="link-text">
+        <span class="link-name">時代劇書評</span>
+        <span class="link-desc">時代小説・歴史もの</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-games/" target="_blank" rel="noopener">
+      <div class="link-icon">🎮</div>
+      <div class="link-text">
+        <span class="link-name">ゲームレビュー</span>
+        <span class="link-desc">ゲーム紹介・感想</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-anime/" target="_blank" rel="noopener">
+      <div class="link-icon">📺</div>
+      <div class="link-text">
+        <span class="link-name">アニメレビュー</span>
+        <span class="link-desc">アニメ感想・紹介</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-books/" target="_blank" rel="noopener">
+      <div class="link-icon">📚</div>
+      <div class="link-text">
+        <span class="link-name">小説書評</span>
+        <span class="link-desc">小説・文学作品</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-movies/" target="_blank" rel="noopener">
+      <div class="link-icon">🎞️</div>
+      <div class="link-text">
+        <span class="link-name">映画レビュー</span>
+        <span class="link-desc">映画感想・紹介</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+  </div>
+
+  <!-- 動画・SNS -->
+  <p class="section-label">📺 動画・SNS</p>
+  <div class="link-grid">
+
+    <a class
   .page-header .lead {
     font-size: 13px;
     color: #c0a878;
