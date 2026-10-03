@@ -86,6 +86,178 @@
     padding: 0 24px 100px;
   }
 
+  /* ─── フラッシュカード ─── */
+  .flashcard-section {
+    background: linear-gradient(135deg, #131a24, #1a2336);
+    border: 1px solid rgba(141,164,191,0.25);
+    border-radius: 12px;
+    padding: 28px 28px 24px;
+    margin-bottom: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .flashcard-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #8da4bf, transparent);
+    opacity: 0.5;
+  }
+
+  .flashcard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .flashcard-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    color: var(--slate);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  .fc-controls {
+    display: flex;
+    gap: 8px;
+  }
+
+  .fc-btn {
+    background: rgba(141,164,191,0.1);
+    border: 1px solid rgba(141,164,191,0.25);
+    border-radius: 6px;
+    color: var(--silver-dim);
+    font-family: 'Noto Serif JP', serif;
+    font-size: 12px;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+  }
+
+  .fc-btn:hover {
+    background: rgba(141,164,191,0.2);
+    color: var(--silver);
+    border-color: rgba(141,164,191,0.45);
+  }
+
+  .fc-btn.primary {
+    background: rgba(141,164,191,0.18);
+    border-color: rgba(141,164,191,0.4);
+    color: var(--silver);
+  }
+
+  /* カード表示エリア */
+  .fc-display {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 10px;
+    min-height: 80px;
+  }
+
+  .fc-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    background: var(--ink-mid);
+    border: 1px solid rgba(141,164,191,0.22);
+    border-radius: 6px;
+    padding: 14px 16px;
+    position: relative;
+    overflow: hidden;
+    animation: fcFadeIn 0.35s ease;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .fc-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, #8da4bf, #4a6278);
+    border-radius: 6px 0 0 6px;
+    opacity: 0.7;
+  }
+
+  .fc-card:hover {
+    border-color: rgba(141,164,191,0.45);
+    transform: translateY(-2px);
+  }
+
+  .fc-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(141,164,191,0.08);
+    border: 1px solid rgba(141,164,191,0.18);
+    border-radius: 4px;
+  }
+
+  .fc-text { flex: 1; min-width: 0; }
+
+  .fc-name {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--silver);
+    margin-bottom: 2px;
+  }
+
+  .fc-cat {
+    display: block;
+    font-size: 10px;
+    color: var(--text-sub);
+    letter-spacing: 0.5px;
+  }
+
+  .fc-arrow {
+    font-size: 18px;
+    color: rgba(141,164,191,0.25);
+    flex-shrink: 0;
+    transition: color 0.2s, transform 0.2s;
+  }
+
+  .fc-card:hover .fc-arrow {
+    color: var(--slate);
+    transform: translateX(3px);
+  }
+
+  .fc-badge {
+    display: inline-block;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--slate-dim);
+    background: rgba(141,164,191,0.07);
+    border: 1px solid rgba(141,164,191,0.15);
+    border-radius: 20px;
+    padding: 2px 8px;
+    margin-top: 16px;
+    text-transform: uppercase;
+  }
+
+  @keyframes fcFadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* 件数インジケーター */
+  .fc-count {
+    font-size: 11px;
+    color: var(--slate-dim);
+    margin-top: 14px;
+    letter-spacing: 1px;
+  }
+
+  /* ─── リンクセクション（既存） ─── */
   .sec-title {
     display: flex;
     align-items: center;
@@ -215,7 +387,9 @@
   @media (max-width: 640px) {
     .main-wrap { padding: 0 14px 70px; }
     .link-grid { grid-template-columns: 1fr; }
+    .fc-display { grid-template-columns: 1fr; }
     .page-header { padding: 44px 16px 36px; }
+    .flashcard-header { flex-direction: column; align-items: flex-start; gap: 12px; }
   }
 </style>
 </head>
@@ -232,6 +406,25 @@
 </header>
 
 <main class="main-wrap">
+
+  <!-- ══════════════════════════════════════
+       フラッシュカード（今日の編集候補）
+  ══════════════════════════════════════ -->
+  <div class="flashcard-section">
+    <div class="flashcard-header">
+      <span class="flashcard-title">✦ Today's Pick — 今日の編集候補</span>
+      <div class="fc-controls">
+        <button class="fc-btn" onclick="changeCount(-1)">− 少なく</button>
+        <button class="fc-btn" onclick="changeCount(1)">+ 多く</button>
+        <button class="fc-btn primary" onclick="shuffle()">🔀 シャッフル</button>
+      </div>
+    </div>
+    <div class="fc-display" id="fcDisplay"></div>
+    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-top:14px;">
+      <p class="fc-count" id="fcCount"></p>
+      <span class="fc-badge">random pick — click to open site</span>
+    </div>
+  </div>
 
   <!-- ══════════════════════════════════════
        1. オリジナル創作
@@ -575,13 +768,13 @@
       <span class="link-arrow">›</span>
     </a>
     <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-georgia/" target="_blank" rel="noopener">
-      <div class="link-icon">🦓</div>
-      <div class="link-text"><span class="link-name">スワヒリ語</span><span class="link-desc">ー</span></div>
+      <div class="link-icon">🇬🇪</div>
+      <div class="link-text"><span class="link-name">ジョージア語</span><span class="link-desc">ー</span></div>
       <span class="link-arrow">›</span>
     </a>
     <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-swahili/" target="_blank" rel="noopener">
-      <div class="link-icon">🇬🇪</div>
-      <div class="link-text"><span class="link-name">ジョージア語</span><span class="link-desc">ー</span></div>
+      <div class="link-icon">🦓</div>
+      <div class="link-text"><span class="link-name">スワヒリ語</span><span class="link-desc">ー</span></div>
       <span class="link-arrow">›</span>
     </a>
     <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-thai/" target="_blank" rel="noopener">
@@ -1320,12 +1513,12 @@
     </a>
     <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-education/" target="_blank" rel="noopener">
       <div class="link-icon">🏫</div>
-      <div class="link-text"><span class="link-name">教育学</span><span class="link-desc">防災の紹介・解説</span></div>
+      <div class="link-text"><span class="link-name">教育学</span><span class="link-desc">教育学の紹介・解説</span></div>
       <span class="link-arrow">›</span>
     </a>
     <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-sociology/" target="_blank" rel="noopener">
       <div class="link-icon">👩‍🍼</div>
-      <div class="link-text"><span class="link-name">社会学</span><span class="link-desc">防災の紹介・解説</span></div>
+      <div class="link-text"><span class="link-name">社会学</span><span class="link-desc">社会学の紹介・解説</span></div>
       <span class="link-arrow">›</span>
     </a>
     <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-ethnology/" target="_blank" rel="noopener">
@@ -1335,7 +1528,7 @@
     </a>
     <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-communication/" target="_blank" rel="noopener">
       <div class="link-icon">🗣️</div>
-      <div class="link-text"><span class="link-name">コミュニケーション学</span><span class="link-desc">コミュニケーション学の紹介・解説</span></div>
+      <div class="link-text"><span class="link-name">コミュニケーション学</span><span class="link-desc">コミュニケーション学</span></div>
       <span class="link-arrow">›</span>
     </a>
     <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-archaeology/" target="_blank" rel="noopener">
@@ -1502,7 +1695,7 @@
     </a>
     <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-textiledesign/" target="_blank" rel="noopener">
       <div class="link-icon">💟</div>
-      <div class="link-text"><span class="link-name">テキスタイルデザイン</span><span class="link-desc">テキスタイルデザインの紹介・解説</span></div>
+      <div class="link-text"><span class="link-name">テキスタイルデザイン</span><span class="link-desc">テキスタイルデザイン</span></div>
       <span class="link-arrow">›</span>
     </a>
   </div>
@@ -1524,7 +1717,7 @@
       <div class="link-text"><span class="link-name">宝石</span><span class="link-desc">宝石の紹介・解説</span></div>
       <span class="link-arrow">›</span>
     </a>
-    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-fan-performingarts/" target="_blank" rel="noopener">
+    <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-performingarts/" target="_blank" rel="noopener">
       <div class="link-icon">🥢</div>
       <div class="link-text"><span class="link-name">伝統工芸</span><span class="link-desc">伝統工芸の紹介・解説</span></div>
       <span class="link-arrow">›</span>
@@ -1617,5 +1810,68 @@
   </div>
 
 </main>
+
+<script>
+// ─── 全サイトデータ（フラッシュカード用）───
+const ALL_SITES = [];
+document.querySelectorAll('.link-card').forEach(card => {
+  const name = card.querySelector('.link-name')?.textContent;
+  const desc = card.querySelector('.link-desc')?.textContent;
+  const icon = card.querySelector('.link-icon')?.textContent;
+  const href = card.getAttribute('href');
+  // セクションラベルを探す（直近の sec-sub か sec-title-text）
+  let cat = '';
+  let el = card.closest('.link-grid');
+  if (el) {
+    let prev = el.previousElementSibling;
+    while (prev) {
+      const t = prev.querySelector('.sec-sub, .sec-title-text');
+      if (t) { cat = t.textContent.trim(); break; }
+      if (prev.classList.contains('sec-sub')) { cat = prev.textContent.trim(); break; }
+      prev = prev.previousElementSibling;
+    }
+    if (!cat) cat = document.querySelector('.sec-title-text')?.textContent ?? '';
+  }
+  if (name && href) ALL_SITES.push({ name, desc, icon: icon?.trim(), href, cat });
+});
+
+let pickCount = 4;
+
+function shuffle() {
+  const pool = [...ALL_SITES].sort(() => Math.random() - 0.5).slice(0, pickCount);
+  render(pool);
+}
+
+function changeCount(delta) {
+  pickCount = Math.max(1, Math.min(12, pickCount + delta));
+  shuffle();
+}
+
+function render(items) {
+  const d = document.getElementById('fcDisplay');
+  d.innerHTML = '';
+  items.forEach(s => {
+    const a = document.createElement('a');
+    a.className = 'fc-card';
+    a.href = s.href;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.innerHTML = `
+      <div class="fc-icon">${s.icon || '🔗'}</div>
+      <div class="fc-text">
+        <span class="fc-name">${s.name}</span>
+        <span class="fc-cat">${s.cat}</span>
+      </div>
+      <span class="fc-arrow">›</span>`;
+    d.appendChild(a);
+  });
+  document.getElementById('fcCount').textContent =
+    `全 ${ALL_SITES.length} サイトからランダムに ${pickCount} 件を表示`;
+}
+
+// 初回
+window.addEventListener('DOMContentLoaded', () => shuffle());
+</script>
+
 </body>
 </html>
